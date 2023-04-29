@@ -1,4 +1,4 @@
-package com.app.monitor.logic;
+package com.app.monitor.analyser;
 
 import com.app.monitor.rest.memory.GarbageCollection;
 import com.sun.management.GarbageCollectionNotificationInfo;
@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GCListener {
+public class GarbageCollectionAnalyser {
 
     private final List<GarbageCollectionNotificationInfo> notifications = Collections.synchronizedList(new ArrayList<>());
 
-    public GCListener() {
+    public GarbageCollectionAnalyser() {
         for (var gcMXBean : ManagementFactory.getGarbageCollectorMXBeans()) {
             NotificationEmitter emitter = (NotificationEmitter) gcMXBean;
             emitter.addNotificationListener((notification, handback) -> {

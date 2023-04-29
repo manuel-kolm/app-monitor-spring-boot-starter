@@ -1,8 +1,7 @@
-package com.app.monitor.logic;
+package com.app.monitor.analyser;
 
 import com.app.monitor.rest.memory.MemoryPool;
 import com.app.monitor.rest.memory.MemoryUsage;
-import com.app.monitor.rest.metric.Metric;
 import com.app.monitor.rest.system.Cpu;
 import com.app.monitor.rest.system.OperatingSystem;
 import org.slf4j.Logger;
@@ -43,15 +42,7 @@ public class JvmAnalyser {
         return Runtime.version().toString();
     }
 
-    public Metric getMetric() {
-        return new Metric()
-                .setCpu(getCpu())
-                .setMemoryPools(getCurrentMemoryPools())
-                .setHeap(getHeapMemoryUsage())
-                .setNonHeap(getNonHeapMemoryUsage());
-    }
-
-    private MemoryUsage getHeapMemoryUsage() {
+    public MemoryUsage getHeapMemoryUsage() {
         java.lang.management.MemoryUsage memoryUsage = memoryMXBean.getHeapMemoryUsage();
         return new MemoryUsage()
                 .setInit(memoryUsage.getInit())
@@ -60,7 +51,7 @@ public class JvmAnalyser {
                 .setUsed(memoryUsage.getUsed());
     }
 
-    private MemoryUsage getNonHeapMemoryUsage() {
+    public MemoryUsage getNonHeapMemoryUsage() {
         java.lang.management.MemoryUsage memoryUsage = memoryMXBean.getNonHeapMemoryUsage();
         return new MemoryUsage()
                 .setInit(memoryUsage.getInit())
@@ -69,7 +60,7 @@ public class JvmAnalyser {
                 .setUsed(memoryUsage.getUsed());
     }
 
-    private List<MemoryPool> getCurrentMemoryPools() {
+    public List<MemoryPool> getCurrentMemoryPools() {
         List<MemoryPool> memoryPools = new ArrayList<>();
         for (MemoryPoolMXBean memoryPoolMXBean : memoryPoolMXBeans) {
             java.lang.management.MemoryUsage memoryUsage = memoryPoolMXBean.getUsage();

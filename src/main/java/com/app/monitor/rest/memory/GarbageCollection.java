@@ -7,7 +7,6 @@ public class GarbageCollection {
     private long id;
     private String name;
     private String cause;
-
     private long duration;
     private Map<String, MemoryUsage> memoryUsageBeforeGc;
     private Map<String, MemoryUsage> memoryUsageAfterGc;

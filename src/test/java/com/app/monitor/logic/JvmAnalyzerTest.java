@@ -1,5 +1,6 @@
 package com.app.monitor.logic;
 
+import com.app.monitor.analyser.JvmAnalyser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

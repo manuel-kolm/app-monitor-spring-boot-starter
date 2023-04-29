@@ -1,10 +1,10 @@
 package com.app.monitor.config;
 
+import com.app.monitor.analyser.GarbageCollectionAnalyser;
+import com.app.monitor.analyser.JvmAnalyser;
 import com.app.monitor.handler.AsyncRequestHandler;
 import com.app.monitor.handler.RequestsHandler;
-import com.app.monitor.logic.GCListener;
 import com.app.monitor.logic.HttpSender;
-import com.app.monitor.logic.JvmAnalyser;
 import com.app.monitor.logic.MetricsHandler;
 import com.app.monitor.logic.RequestsService;
 import com.app.monitor.logic.RunnerLoop;
@@ -31,8 +31,8 @@ public class AppMonitorAutoConfiguration {
     }
 
     @Bean
-    MetricsHandler metricsHandler(JvmAnalyser jvmAnalyser, HttpSender httpSender) {
-        return new MetricsHandler(jvmAnalyser, httpSender);
+    MetricsHandler metricsHandler(JvmAnalyser jvmAnalyser, GarbageCollectionAnalyser garbageCollectionAnalyser, HttpSender httpSender) {
+        return new MetricsHandler(jvmAnalyser, garbageCollectionAnalyser, httpSender);
     }
 
     @Bean
@@ -61,8 +61,8 @@ public class AppMonitorAutoConfiguration {
     }
 
     @Bean
-    GCListener gcListener() {
-        return new GCListener();
+    GarbageCollectionAnalyser garbageCollectionAnalyser() {
+        return new GarbageCollectionAnalyser();
     }
 
     @Bean

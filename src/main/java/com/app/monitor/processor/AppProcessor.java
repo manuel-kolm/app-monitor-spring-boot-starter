@@ -1,7 +1,7 @@
 package com.app.monitor.processor;
 
+import com.app.monitor.analyser.JvmAnalyser;
 import com.app.monitor.logic.HttpSender;
-import com.app.monitor.logic.JvmAnalyser;
 import com.app.monitor.rest.host.CreateProcessRequest;
 import com.app.monitor.rest.host.CreateProcessResponse;
 import com.app.monitor.rest.host.DeleteProcessRequest;
