@@ -22,7 +22,7 @@ public class RequestsHandler implements HandlerInterceptor {
     }
 
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
-                                @Nullable Exception ex) throws Exception {
+                                @Nullable Exception exception) throws Exception {
 
         HttpRequestWrapper requestWrapper = new HttpRequestWrapper()
                 .setInternalId(request.getRequestId())
@@ -30,7 +30,8 @@ public class RequestsHandler implements HandlerInterceptor {
                 .setStatusCode(response.getStatus())
                 .setMethod(request.getMethod())
                 .setStarted(ZonedDateTime.now())
-                .setDuration(System.currentTimeMillis() - (Long) request.getAttribute("request-start-time"));
+                .setDuration(System.currentTimeMillis() - (Long) request.getAttribute("request-start-time"))
+                .setException(exception);
 
         requestsService.enqueue(requestWrapper);
     }

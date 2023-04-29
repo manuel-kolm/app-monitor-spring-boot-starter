@@ -1,5 +1,7 @@
 package com.app.monitor.rest.networking;
 
+import com.app.monitor.rest.system.ExceptionInfo;
+
 import java.time.ZonedDateTime;
 
 public class Request {
@@ -10,6 +12,7 @@ public class Request {
     private String method;
     private ZonedDateTime started;
     private long duration;
+    private ExceptionInfo exception;
 
     public String getId() {
         return id;
@@ -62,6 +65,15 @@ public class Request {
 
     public Request setDuration(long duration) {
         this.duration = duration;
+        return this;
+    }
+
+    public ExceptionInfo getException() {
+        return exception;
+    }
+
+    public Request setException(ExceptionInfo exception) {
+        this.exception = exception;
         return this;
     }
 }

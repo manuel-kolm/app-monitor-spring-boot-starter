@@ -10,6 +10,7 @@ public class HttpRequestWrapper {
     private String method;
     private ZonedDateTime started;
     private long duration;
+    private Exception exception;
 
     public String getInternalId() {
         return internalId;
@@ -62,6 +63,15 @@ public class HttpRequestWrapper {
 
     public HttpRequestWrapper setDuration(long duration) {
         this.duration = duration;
+        return this;
+    }
+
+    public Exception getException() {
+        return exception;
+    }
+
+    public HttpRequestWrapper setException(Exception exception) {
+        this.exception = exception;
         return this;
     }
 }
