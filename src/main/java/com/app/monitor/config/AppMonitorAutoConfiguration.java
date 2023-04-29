@@ -15,9 +15,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+@EnableConfigurationProperties({AppMonitorConfigProperties.class})
 public class AppMonitorAutoConfiguration {
 
     @Bean
@@ -41,8 +43,8 @@ public class AppMonitorAutoConfiguration {
     }
 
     @Bean
-    RunnerLoop runnerLoop(MetricsHandler metricsHandler, RequestsService requestsService, JvmAnalyser jvmAnalyser, HttpSender httpSender) {
-        return new RunnerLoop(metricsHandler, requestsService, jvmAnalyser, httpSender);
+    RunnerLoop runnerLoop(MetricsHandler metricsHandler, RequestsService requestsService, JvmAnalyser jvmAnalyser, HttpSender httpSender, AppMonitorConfigProperties appMonitorConfigProperties) {
+        return new RunnerLoop(metricsHandler, requestsService, jvmAnalyser, httpSender, appMonitorConfigProperties);
     }
 
     @Bean

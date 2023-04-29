@@ -1,6 +1,7 @@
 package com.app.monitor.logic;
 
 import com.app.monitor.analyser.JvmAnalyser;
+import com.app.monitor.config.AppMonitorConfigProperties;
 import com.app.monitor.rest.host.CreateProcessRequest;
 import com.app.monitor.rest.host.CreateProcessResponse;
 import com.app.monitor.rest.host.DeleteProcessRequest;
@@ -17,16 +18,19 @@ public class RunnerLoop implements Runnable {
     private final RequestsService requestsService;
     private final JvmAnalyser jvmAnalyser;
     private final HttpSender httpSender;
+    private final AppMonitorConfigProperties appMonitorConfigProperties;
 
-    public RunnerLoop(MetricsHandler metricsHandler, RequestsService requestsService, JvmAnalyser jvmAnalyser, HttpSender httpSender) {
+    public RunnerLoop(MetricsHandler metricsHandler, RequestsService requestsService, JvmAnalyser jvmAnalyser, HttpSender httpSender, AppMonitorConfigProperties appMonitorConfigProperties) {
         this.metricsHandler = metricsHandler;
         this.requestsService = requestsService;
         this.jvmAnalyser = jvmAnalyser;
         this.httpSender = httpSender;
+        this.appMonitorConfigProperties = appMonitorConfigProperties;
     }
 
     public void init() {
         CreateProcessRequest startupMessage = new CreateProcessRequest()
+                .setName(appMonitorConfigProperties.getName())
                 .setOperatingSystem(jvmAnalyser.getOperatingSystem())
                 .setCreated(ZonedDateTime.now());
 
