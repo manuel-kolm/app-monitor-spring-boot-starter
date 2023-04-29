@@ -6,7 +6,6 @@ import com.app.monitor.rest.system.Cpu;
 import com.app.monitor.rest.system.OperatingSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
@@ -20,7 +19,6 @@ import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 public class JvmAnalyser {
 
     private static final Logger LOG = LoggerFactory.getLogger(JvmAnalyser.class);

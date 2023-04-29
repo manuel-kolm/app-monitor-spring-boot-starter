@@ -41,15 +41,20 @@ public class AppMonitorAutoConfiguration {
     }
 
     @Bean
-    @Qualifier("runnerThread")
-    @ConditionalOnMissingBean
-    Thread runnerThread(MetricsHandler metricsHandler, HttpSender httpSender, RequestsService requestsService) {
-        return new Thread(new RunnerLoop(httpSender, metricsHandler, requestsService));
+    RunnerLoop runnerLoop(MetricsHandler metricsHandler, RequestsService requestsService, JvmAnalyser jvmAnalyser, HttpSender httpSender) {
+        return new RunnerLoop(metricsHandler, requestsService, jvmAnalyser, httpSender);
     }
 
     @Bean
-    AppProcessor processor(HttpSender httpSender, JvmAnalyser jvmAnalyser, @Qualifier("runnerThread") Thread runnerThread) {
-        return new AppProcessor(httpSender, jvmAnalyser, runnerThread);
+    @Qualifier("runnerThread")
+    @ConditionalOnMissingBean
+    Thread runnerThread(RunnerLoop runnerLoop) {
+        return new Thread(runnerLoop);
+    }
+
+    @Bean
+    AppProcessor processor(RunnerLoop runnerLoop, @Qualifier("runnerThread") Thread runnerThread) {
+        return new AppProcessor(runnerLoop, runnerThread);
     }
 
     @Bean

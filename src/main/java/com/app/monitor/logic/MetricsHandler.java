@@ -4,9 +4,7 @@ import com.app.monitor.analyser.GarbageCollectionAnalyser;
 import com.app.monitor.analyser.JvmAnalyser;
 import com.app.monitor.rest.metric.Metric;
 import com.app.monitor.rest.metric.PostMetricRequest;
-import org.springframework.stereotype.Service;
 
-@Service
 public class MetricsHandler {
 
     private final JvmAnalyser jvmAnalyser;
