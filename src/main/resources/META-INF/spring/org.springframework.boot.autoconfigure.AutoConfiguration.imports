@@ -1,0 +1,2 @@
+com.app.monitor.config.AppMonitorAutoConfiguration
+com.app.monitor.config.WebMvcAutoConfiguration
