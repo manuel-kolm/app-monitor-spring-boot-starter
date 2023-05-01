@@ -9,6 +9,7 @@ import com.app.monitor.logic.MetricsHandler;
 import com.app.monitor.logic.RequestsService;
 import com.app.monitor.logic.RunnerLoop;
 import com.app.monitor.processor.AppProcessor;
+import com.app.monitor.processor.ApplicationShutdownListener;
 import com.app.monitor.processor.ApplicationStartupListener;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,6 +41,11 @@ public class AppMonitorAutoConfiguration {
     @Bean
     ApplicationStartupListener listener(ApplicationContext context, AppProcessor processor) {
         return new ApplicationStartupListener(context, processor);
+    }
+
+    @Bean
+    ApplicationShutdownListener applicationShutdownListener(ApplicationContext context, AppProcessor processor) {
+        return new ApplicationShutdownListener(context, processor);
     }
 
     @Bean

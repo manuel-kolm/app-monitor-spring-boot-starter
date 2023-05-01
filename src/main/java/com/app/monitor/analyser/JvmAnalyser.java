@@ -104,7 +104,7 @@ public class JvmAnalyser {
         return new OperatingSystem()
                 .setName(operatingSystemMXBean.getName())
                 .setArch(operatingSystemMXBean.getArch())
-                .setVersion(operatingSystemMXBean.getVersion())
-                .setAvailableProcessors(operatingSystemMXBean.getAvailableProcessors());
+                .setVersion(operatingSystemMXBean.getVersion());
+        //.setAvailableProcessors(operatingSystemMXBean.getAvailableProcessors());
     }
 }

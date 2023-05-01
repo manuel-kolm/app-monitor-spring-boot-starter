@@ -3,7 +3,9 @@ package com.app.monitor.logic;
 import com.app.monitor.analyser.GarbageCollectionAnalyser;
 import com.app.monitor.analyser.JvmAnalyser;
 import com.app.monitor.rest.metric.Metric;
-import com.app.monitor.rest.metric.PostMetricRequest;
+import com.app.monitor.rest.metric.MetricData;
+
+import java.time.ZonedDateTime;
 
 public class MetricsHandler {
 
@@ -18,13 +20,14 @@ public class MetricsHandler {
     }
 
     public void sendAll() {
-        PostMetricRequest request = new PostMetricRequest();
-        request.getMetrics().add(getCurrentMetric());
-        httpSender.send("/metrics", request, Void.class);
+        Metric metric = new Metric();
+        metric.getData().add(getCurrentMetricData());
+        httpSender.send("/metrics", metric, Void.class);
     }
 
-    private Metric getCurrentMetric() {
-        return new Metric()
+    private MetricData getCurrentMetricData() {
+        return new MetricData()
+                .setCreated(ZonedDateTime.now())
                 .setCpu(jvmAnalyser.getCpu())
                 .setMemoryPools(jvmAnalyser.getCurrentMemoryPools())
                 .setHeap(jvmAnalyser.getHeapMemoryUsage())

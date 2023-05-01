@@ -2,9 +2,6 @@ package com.app.monitor.logic;
 
 import com.app.monitor.analyser.JvmAnalyser;
 import com.app.monitor.config.AppMonitorConfigProperties;
-import com.app.monitor.rest.host.CreateProcessRequest;
-import com.app.monitor.rest.host.CreateProcessResponse;
-import com.app.monitor.rest.host.DeleteProcessRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ExitCodeEvent;
@@ -29,20 +26,20 @@ public class RunnerLoop implements Runnable {
     }
 
     public void init() {
-        CreateProcessRequest startupMessage = new CreateProcessRequest()
+        com.app.monitor.rest.host.Process processRequest = new com.app.monitor.rest.host.Process()
                 .setName(appMonitorConfigProperties.getName())
                 .setOperatingSystem(jvmAnalyser.getOperatingSystem())
                 .setCreated(ZonedDateTime.now());
 
-        CreateProcessResponse response = httpSender.send("/processes", startupMessage, CreateProcessResponse.class);
+        com.app.monitor.rest.host.Process response = httpSender.send("/processes", processRequest, com.app.monitor.rest.host.Process.class);
         httpSender.setProcessId(response.getId());
     }
 
     public void stop(ExitCodeEvent event) {
-        DeleteProcessRequest shutdownMessage = new DeleteProcessRequest()
+/*        DeleteProcessRequest shutdownMessage = new DeleteProcessRequest()
                 .setExitCode(event.getExitCode());
 
-        httpSender.send("/processes", shutdownMessage, Void.class);
+        httpSender.send("/processes", shutdownMessage, Void.class);*/
     }
 
     @Override

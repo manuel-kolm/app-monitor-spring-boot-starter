@@ -43,8 +43,12 @@ public class RequestsService {
     }
 
     private ExceptionInfo translateException(Exception exception) {
+        if (exception == null) {
+            return null;
+        }
+
         return new ExceptionInfo()
-                .setClassId(exception.getClass().getClass().getName())
+                .setClassId(exception.getClass().getName())
                 .setMessage(exception.getMessage())
                 .setStackTrace(Arrays.stream(exception.getStackTrace())
                         .map(StackTraceElement::toString)
