@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class AppMonitorConfigProperties {
 
     private String name;
+    private boolean trackLocalRequests = true;
 
     public String getName() {
         return name;
@@ -13,6 +14,15 @@ public class AppMonitorConfigProperties {
 
     public AppMonitorConfigProperties setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public boolean isTrackLocalRequests() {
+        return trackLocalRequests;
+    }
+
+    public AppMonitorConfigProperties setTrackLocalRequests(boolean trackLocalRequests) {
+        this.trackLocalRequests = trackLocalRequests;
         return this;
     }
 }

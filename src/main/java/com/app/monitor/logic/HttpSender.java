@@ -1,8 +1,6 @@
 package com.app.monitor.logic;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
@@ -12,10 +10,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class HttpSender {
 
-    private final Logger LOG = LoggerFactory.getLogger(HttpSender.class);
+    private static final Logger LOG = Logger.getLogger(HttpSender.class.getName());
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final List<String> messageQueue = new ArrayList<>();
     private final ObjectMapper objectMapper;

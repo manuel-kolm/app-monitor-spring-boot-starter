@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.datadog</groupId>
-    <artifactId>app-monitor-spring-boot-starter</artifactId>
+    <groupId>com.app.monitor</groupId>
+    <artifactId>spring-boot-starter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
@@ -18,7 +18,7 @@
         <spring.boot.version>3.0.6</spring.boot.version>
         <jackson-databind.version>2.15.0</jackson-databind.version>
         <tomcat-embed.version>10.1.8</tomcat-embed.version>
-        
+
         <com-app-monitor.version>${project.version}</com-app-monitor.version>
     </properties>
 
@@ -36,11 +36,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
         <dependency>

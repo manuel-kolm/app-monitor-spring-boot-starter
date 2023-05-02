@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Bean;
 public class AppMonitorAutoConfiguration {
 
     @Bean
-    HttpSender httpSender(ObjectMapper objectMapper) {
+    HttpSender httpSender(@Qualifier("appMonitorObjectMapper") ObjectMapper objectMapper) {
         return new HttpSender(objectMapper);
     }
 
@@ -65,7 +65,7 @@ public class AppMonitorAutoConfiguration {
         return new AppProcessor(runnerLoop, runnerThread);
     }
 
-    @Bean
+    @Bean("appMonitorObjectMapper")
     ObjectMapper objectMapper() {
         JavaTimeModule module = new JavaTimeModule();
         return new ObjectMapper()
@@ -84,8 +84,8 @@ public class AppMonitorAutoConfiguration {
     }
 
     @Bean
-    RequestsHandler requestHandler(RequestsService requestTraceService) {
-        return new RequestsHandler(requestTraceService);
+    RequestsHandler requestHandler(RequestsService requestTraceService, AppMonitorConfigProperties appMonitorConfigProperties) {
+        return new RequestsHandler(requestTraceService, appMonitorConfigProperties);
     }
 
     @Bean

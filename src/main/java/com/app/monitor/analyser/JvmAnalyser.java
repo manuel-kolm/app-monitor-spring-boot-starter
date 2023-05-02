@@ -4,8 +4,6 @@ import com.app.monitor.rest.memory.MemoryPool;
 import com.app.monitor.rest.memory.MemoryUsage;
 import com.app.monitor.rest.system.Cpu;
 import com.app.monitor.rest.system.OperatingSystem;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.management.Attribute;
 import javax.management.AttributeList;
@@ -18,10 +16,12 @@ import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JvmAnalyser {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JvmAnalyser.class);
+    private static final Logger LOG = Logger.getLogger(JvmAnalyser.class.getName());
 
     private final MemoryMXBean memoryMXBean;
     private final List<MemoryPoolMXBean> memoryPoolMXBeans;
@@ -95,7 +95,7 @@ public class JvmAnalyser {
             }
 
         } catch (Exception ex) {
-            LOG.error("Failed to calculate process cpu load. Root cause: " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Failed to calculate process cpu load. Root cause", ex.getMessage());
         }
         return -1.0;
     }

@@ -2,15 +2,15 @@ package com.app.monitor.logic;
 
 import com.app.monitor.analyser.JvmAnalyser;
 import com.app.monitor.config.AppMonitorConfigProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.ExitCodeEvent;
 
 import java.time.ZonedDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RunnerLoop implements Runnable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RunnerLoop.class);
+    private static final Logger LOG = Logger.getLogger(RunnerLoop.class.getName());
     private final MetricsHandler metricsHandler;
     private final RequestsService requestsService;
     private final JvmAnalyser jvmAnalyser;
@@ -52,7 +52,7 @@ public class RunnerLoop implements Runnable {
                 Thread.sleep(60000 - System.currentTimeMillis() % 60000);
             }
         } catch (Exception e) {
-            LOG.error(e.toString());
+            LOG.log(Level.SEVERE, e.toString());
         }
     }
 }
